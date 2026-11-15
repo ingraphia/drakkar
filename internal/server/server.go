@@ -33,14 +33,14 @@ func New(c *config.Config) *Server {
 }
 
 func (s *Server) Run() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    mux := http.NewServeMux()
+
+    mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         fmt.Fprintf(w, "Hello, Drakkar!")
     })
 
     addr := ":" + strconv.FormatUint(uint64(s.Conf.Port()), 10)
-    err := http.ListenAndServe(addr, nil)
-
-    if err != nil {
+    if err := http.ListenAndServe(addr, mux); err != nil {
         fmt.Println("Error: ", err)
     }
 }
