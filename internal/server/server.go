@@ -23,24 +23,24 @@ import (
 )
 
 type Server struct {
-    Conf *config.Config
+	Conf *config.Config
 }
 
 func New(c *config.Config) *Server {
-    return &Server{
-        Conf: c,
-    }
+	return &Server{
+		Conf: c,
+	}
 }
 
 func (s *Server) Run() {
-    mux := http.NewServeMux()
+	mux := http.NewServeMux()
 
-    mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello, Drakkar!")
-    })
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, Drakkar!")
+	})
 
-    addr := ":" + strconv.FormatUint(uint64(s.Conf.Port()), 10)
-    if err := http.ListenAndServe(addr, mux); err != nil {
-        fmt.Println("Error: ", err)
-    }
+	addr := ":" + strconv.FormatUint(uint64(s.Conf.Port()), 10)
+	if err := http.ListenAndServe(addr, mux); err != nil {
+		fmt.Println("Error: ", err)
+	}
 }

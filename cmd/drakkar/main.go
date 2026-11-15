@@ -14,17 +14,8 @@
 
 package main
 
-import (
-	"fmt"
-
-	"github.com/ingraphia/drakkar/internal/server"
-    "github.com/ingraphia/drakkar/internal/config"
-)
+import drakkar "github.com/ingraphia/drakkar/internal/app"
 
 func main() {
-    c := config.Setup()
-    api := *server.New(c)
-
-    fmt.Println("Drakkar server starting...")
-    api.Run()
+	drakkar.Start()
 }

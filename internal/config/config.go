@@ -15,15 +15,15 @@
 package config
 
 type Config struct {
-    port uint64
+	port uint64
 }
 
 func Setup() *Config {
-    return &Config{
-        port: 8081,
-    }
+	return &Config{
+		port: 8081,
+	}
 }
 
 func (c *Config) Port() uint64 {
-    return c.port
+	return c.port
 }
