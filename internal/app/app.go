@@ -36,7 +36,7 @@ func Start() {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 
 	defer stop()
-    defer fmt.Println("\nDrakkar server shutdown...")
+	defer fmt.Println("\nDrakkar server shutdown...")
 
 	<-ctx.Done()
 }

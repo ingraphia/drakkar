@@ -35,9 +35,7 @@ func New(c *config.Config) *Server {
 func (s *Server) Run() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, Drakkar!")
-	})
+	Register(mux, "/api", EndpointHandler{Endpoint: "/healthz", Fn: Healthz})
 
 	addr := ":" + strconv.FormatUint(uint64(s.Conf.Port()), 10)
 	if err := http.ListenAndServe(addr, mux); err != nil {
