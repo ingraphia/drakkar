@@ -16,16 +16,15 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+
+	"github.com/ingraphia/drakkar/internal/server"
+    "github.com/ingraphia/drakkar/internal/config"
 )
 
 func main() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello, Drakkar!")
-    })
+    c := config.Setup()
+    api := *server.New(c)
 
-    err := http.ListenAndServe(":8081", nil)
-    if err != nil {
-        fmt.Println("Error: ", err)
-    }
+    fmt.Println("Drakkar server starting...")
+    api.Run()
 }
