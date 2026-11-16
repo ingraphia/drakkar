@@ -14,7 +14,7 @@
 
 package main
 
-import drakkar "github.com/ingraphia/drakkar/internal/app"
+import drakkar "github.com/ingraphia/drakkar/internal/drakkar"
 
 func main() {
 	drakkar.Start()
