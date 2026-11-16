@@ -15,15 +15,21 @@
 package config
 
 type Config struct {
-	port uint64
+	port     uint64
+	logLevel string
 }
 
 func Setup() *Config {
 	return &Config{
-		port: 8081,
+		port:     8081,
+		logLevel: "INFO",
 	}
 }
 
 func (c *Config) Port() uint64 {
 	return c.port
+}
+
+func (c *Config) LogLevel() string {
+	return c.logLevel
 }

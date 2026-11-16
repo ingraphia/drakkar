@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package app
+package drakkar
 
 import (
 	"context"
-	"fmt"
+	"log/slog"
 	"os/signal"
 	"syscall"
 
@@ -26,17 +26,19 @@ import (
 
 func Start() {
 	c := config.Setup()
-	api := *server.New(c)
 
+	SetupLoggers(c)
+
+	api := *server.New(c)
 	go func() {
-		fmt.Println("Drakkar server starting...")
+		slog.Info("Starting Drakkar server...")
 		api.Run()
 	}()
 
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 
 	defer stop()
-	defer fmt.Println("\nDrakkar server shutdown...")
+	defer slog.Info("Drakkar server shutdown...")
 
 	<-ctx.Done()
 }
